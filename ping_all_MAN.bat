@@ -7,7 +7,7 @@
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
-@ECHO OFF & TITLE Meir-Tools & SET BATman=%~dp0BATman 
+@ECHO OFF & TITLE Meir-Tools & SET BATman="%~dp0BATman"
 if exist %BATman%.* ( echo %BATman% -^> Installed ) else ( echo %BATman% -^> Not Installed & PAUSE)
  
 ::--------------------------------------------------
@@ -50,6 +50,10 @@ GOTO :Main
 	::--------------------------------------------------
 	for /L %%z in (1,1,254) do ping 10.0.0.%%z -w 1 -n 1 -i 1
 	
+EXIT /B 0
+:OPT2 | 2 - get by mac
+	CALL %BATman% :GetIP_byMAC "e4-aa-ec-96-81-54"
+	pause
 EXIT /B 0
   
 :OPT- | - - - - - - costum functions here - - - - - - - - - -  
