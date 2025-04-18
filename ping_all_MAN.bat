@@ -67,7 +67,7 @@ EXIT /B 0
 	pause
 EXIT /B 0
 :OPTP | P - ipconfig
-	ipconfig
+	ipconfig /all
 	pause
 EXIT /B 0
 :OPTE | E - Edit
