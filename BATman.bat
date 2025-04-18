@@ -9,6 +9,7 @@
 ::or: @ECHO OFF & TITLE Meir-E &SET BATman=%USERPROFILE%\Documents\GitHub\Functions\BATman.bat &call %1
 ::replace: CALL :func
 ::with: CALL !MAN_Func! :func
+SET BATman=%USERPROFILE%\Documents\GitHub\Functions\BATman
 SET local_path="%0\.."
 CALL %*
 EXIT /B %ERRORLEVEL%
@@ -37,6 +38,13 @@ EXIT /B 0
 	setlocal
 	start "" %local_path%\AHK_Send_Key.exe %1
 	endlocal
+EXIT /B 0  
+:AHK_Img_Click <Img_path>
+	:: May requare Admin mode
+	::ref | https://github.com/Meir-E/AHK_Img_Click
+	setlocal
+	start "" %local_path%\AHK_Img_Click.exe %1
+	endlocal
 EXIT /B 0 
 :ConsolePrintColor <hexColorCode> <str>
 	setlocal
@@ -50,7 +58,7 @@ EXIT /B 0
 ::------------------------------------MAN_Functions-------------------------------------------
 :Print_MAN_Logo
 :MAN_Print_Logo
-	echo -----------------------------------------------------------
+	echo ---------------------------------------------BATman-------
 	echo "       @@@@        @@@.      @@@       #@*     @*      "      
 	echo "       @@*@(      @&#@.     @@@@@      #@@     @#      "      
 	echo "       @@ (@.    @@ #@.    @@   @@     #@*@    @#      "      
@@ -58,6 +66,33 @@ EXIT /B 0
 	echo "       @@   @@ (@   #@.  @@       @@   #@*  @ @@#      "      
 	echo "       @@    @@@,   #@. @@         @@  #@     @@#      "
 	echo ----------------------------------------------------------
+EXIT /B 0
+:MAN_Print_Logo_shrinked1
+	echo ---------------------------------------------BATman-------
+	echo "       @@@@        @@@.      @@@       #@*     @*      "      
+	echo "       @@ (@.    @@ #@.    @@   @@     #@*@    @#      "      
+	echo "       @@  @@   @@  #@.   @@=====@@    #@* @   @#      "      
+	echo "       @@    @@@,   #@. @@         @@  #@     @@#      "
+	echo ----=Meir-Tools=------------------------------------------
+EXIT /B 0
+:MAN_Print_Meir_tools_Logo
+	echo ---------------------------------------------BATman-------------------  
+	echo "       @@@@        @@@.               #@*          @@@@@@@@@@@@     "        
+	echo "       @@*@(      @&#@.      @@@                   @@.        @@    "        
+	echo "       @@ (@.    @@ #@.   @@    .@@   #@*          @@.       @@/    "        
+	echo "       @@  @@   @@  #@.  @@@@@@@@@@@  #@*          @@@@@@@@@/       "        
+	echo "       @@   @@ (@   #@.  @@           #@*          @@.     *@@.     "        
+	echo "       @@    @@@,   #@.  .@@,   .@@*  #@*          @@.       &@@    "        
+	echo "                             /#(.                                   "
+	echo ----=Meir-Tools=------------------------------------------------------
+EXIT /B 0
+:MAN_Print_Meir_tools_Logo_shrinked1  &REM ### TBD
+	echo ---------------------------------------------BATman-------------------    
+	echo "       @@@@        @@@.      @@@      #@*          @@@@@@@@@@@@ 
+	echo "       @@ (@.    @@ #@.   @@    .@@                @@.       @@/    "        
+	echo "       @@  @@   @@  #@.  @@=======@@  #@*          @@======@@/      "        
+	echo "       @@    @@@,   #@.   @.______.   #@*          @@.      *@@.    "
+	echo ----=Meir-Tools=------------------------------------------------------
 EXIT /B 0
 :ShowMenu <file_path>	
 :MAN_ShowMenu <file_path>	
@@ -73,4 +108,22 @@ EXIT /B 0
 	FOR /F "tokens=1" %%F IN ('"arp -a | findstr /R /C:%1"') DO set Result=%%F
 	IF [%Result%]==[] (echo String is Empty, no IP.&EXIT /B 1) else (echo %Result% )
 EXIT /B 0
+:Edit_me    &REM | E - Edit
+	:: need send the '%0' over the function
+	::set lpath=%0 ::in top
+	echo %lpath%
+	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
+	pause
+EXIT /B 0
+:Info_About &REM I - Info and About
+	CALL :MAN_Print_Meir_tools_Logo_shrinked1 &REM ### 
+	echo info about this MAN menu , how to use , TBD
+	echo By Meir-Tools ^| https://github.com/Meir-Tools/MAN
+	echo Revision 0.9b , date 20240725
+EXIT /B 0
 ::------------------------------------END--------------------------------------------------------
+:: TBD
+:: add Check_Installed function to checl files installed ? 
+:: 
+:: 
+:: 

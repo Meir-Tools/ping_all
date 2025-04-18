@@ -7,8 +7,9 @@
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
-@ECHO OFF & TITLE Meir-Tools & SET BATman="%~dp0BATman"
+@ECHO OFF & TITLE Meir-Tools & SET BATman="%~dp0BATman" & SET dta_ini="%~dp0dta.ini" 
 if exist %BATman%.* ( echo %BATman% -^> Installed ) else ( echo %BATman% -^> Not Installed & PAUSE)
+if exist %dta_ini%.* ( echo %dta_ini% -^> Installed ) else ( echo %dta_ini% -^> Not Installed & PAUSE)
  
 ::--------------------------------------------------
 :: Meir-Tools | set Global variables
@@ -29,8 +30,10 @@ if exist %BATman%.* ( echo %BATman% -^> Installed ) else ( echo %BATman% -^> Not
 	:: Print Header | 
 	::--------------------------------------------------
 	CLS
-	CALL %BATman% :MAN_Print_Logo %0
+	CALL %BATman% :MAN_Print_Logo_shrinked1 %0
 	ECHO MAN-MENU
+	echo ----------------------------------------------------------------------
+	CALL %BATman% :ini_print %dta_ini%
 	echo ----------------------------------------------------------------------
 	::--------------------------------------------------
 	:: Notes | 
@@ -44,21 +47,25 @@ if exist %BATman%.* ( echo %BATman% -^> Installed ) else ( echo %BATman% -^> Not
 	::--------------------------------------------------
 GOTO :Main
 ::--------------------------MAN Functions------------------------------------------------
-:OPT1 | 1 - ping_all_10.0.0.x
+:OPT1 | 1 - ping_all - ofc_ip=!ini_ofc_ip!
 	::--------------------------------------------------
 	::    Ping_all
 	::--------------------------------------------------
-	for /L %%z in (1,1,254) do ping 10.0.0.%%z -w 1 -n 1 -i 1
+	for /L %%z in (1,1,254) do ping %ini_ofc_ip%%%z -w 1 -n 1 -i 1
 	
 EXIT /B 0
-:OPT2 | 2 - get by mac
-	CALL %BATman% :GetIP_byMAC "e4-aa-ec-96-81-54"
+:OPT2 | 2 - get by mac - mac_addr=!ini_mac_addr!
+	CALL %BATman% :GetIP_byMAC "%ini_mac_addr%"
 	pause
 EXIT /B 0
   
 :OPT- | - - - - - - costum functions here - - - - - - - - - -  
 	PAUSE
 EXIT /B 0 
+:OPTE | P - ipconfig
+	ipconfig
+	pause
+EXIT /B 0
 :OPTE | E - Edit
 	echo %lpath% &REM set lpath=%0 ::in top
 	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
