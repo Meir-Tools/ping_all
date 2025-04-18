@@ -62,13 +62,17 @@ EXIT /B 0
 :OPT- | - - - - - - costum functions here - - - - - - - - - -  
 	PAUSE
 EXIT /B 0 
-:OPTE | P - ipconfig
+:OPTA | A - arp -a
+	arp -a
+	pause
+EXIT /B 0
+:OPTP | P - ipconfig
 	ipconfig
 	pause
 EXIT /B 0
 :OPTE | E - Edit
 	echo %lpath% &REM set lpath=%0 ::in top
-	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
+	start "" "C:\Program Files\Notepad++\notepad++.exe" %~f0
 	pause
 EXIT /B 0
 :OPTI | I - Info
